@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#ff7a00"
+    >
+
+    <title>Administrativo — Luz & Memória</title>
+
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         LOGIN
+    ====================================================== -->
+
+    <section id="loginScreen" class="login-screen">
+
+        <div class="login-box">
+
+            <div class="login-logo">
+                <span>L&M</span>
+            </div>
+
+            <span class="login-label">
+                ÁREA ADMINISTRATIVA
+            </span>
+
+            <h1>Luz & Memória</h1>
+
+            <p class="login-subtitle">
+                Acesso restrito ao administrador
+            </p>
+
+            <form id="loginForm">
+
+                <label for="senhaAdmin">
+                    Senha
+                </label>
+
+                <input
+                    type="password"
+                    id="senhaAdmin"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="btn btn-principal"
+                >
+                    Entrar
+                </button>
+
+                <p id="loginMensagem" class="mensagem-login"></p>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         APLICAÇÃO ADMINISTRATIVA
+    ====================================================== -->
+
+    <section id="adminApp" class="admin-app" hidden>
+
+        <!-- SIDEBAR -->
+
+        <aside id="sidebar" class="sidebar">
+
+            <div class="sidebar-top">
+
+                <div class="admin-logo">
+
+                    <span>L&M</span>
+
+                    <div>
+                        <strong>Luz & Memória</strong>
+                        <small>Administrativo</small>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="btnFecharSidebar"
+                    class="btn-sidebar-mobile"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <nav class="admin-nav">
+
+                <button
+                    type="button"
+                    class="nav-item ativo"
+                    data-section="dashboard"
+                >
+                    <span>⌂</span>
+                    Dashboard
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    data-section="galerias"
+                >
+                    <span>▣</span>
+                    Galerias
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    data-section="fotos"
+                >
+                    <span>▧</span>
+                    Fotos
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    data-section="clientes"
+                >
+                    <span>♙</span>
+                    Clientes
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    data-section="favoritos"
+                >
+                    <span>♡</span>
+                    Favoritos
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                    data-section="configuracoes"
+                >
+                    <span>⚙</span>
+                    Configurações
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <div class="storage-info">
+
+                    <span>CAPACIDADE</span>
+
+                    <strong>
+                        <span id="quantidadeFotosAtual">0</span>
+                        / 1.500 fotos
+                    </strong>
+
+                    <div class="storage-bar">
+                        <span id="storageProgress"></span>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="btnSair"
+                    class="btn-sair"
+                >
+                    <span>↪</span>
+                    Sair
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <div
+            id="sidebarOverlay"
+            class="sidebar-overlay"
+        ></div>
+
+
+        <!-- CONTEÚDO -->
+
+        <main class="admin-main">
+
+            <header class="admin-header">
+
+                <button
+                    type="button"
+                    id="btnAbrirSidebar"
+                    class="btn-menu-mobile"
+                >
+                    ☰
+                </button>
+
+                <div>
+
+                    <span class="header-label">
+                        PAINEL ADMINISTRATIVO
+                    </span>
+
+                    <h1 id="tituloSecao">
+                        Dashboard
+                    </h1>
+
+                </div>
+
+                <div class="admin-status">
+                    <span></span>
+                    Sistema ativo
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
+
+            <section
+                id="section-dashboard"
+                class="admin-section ativa"
+            >
+
+                <div class="section-intro">
+
+                    <div>
+
+                        <span class="section-label">
+                            VISÃO GERAL
+                        </span>
+
+                        <h2>
+                            Bem-vindo ao painel
+                        </h2>
+
+                        <p>
+                            Gerencie o conteúdo do site Luz & Memória.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon">
+                            ▣
+                        </div>
+
+                        <div>
+                            <span>Galerias</span>
+                            <strong id="totalGalerias">0</strong>
+                        </div>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon">
+                            ▧
+                        </div>
+
+                        <div>
+                            <span>Fotos</span>
+                            <strong id="totalFotos">0</strong>
+                        </div>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon">
+                            ♡
+                        </div>
+
+                        <div>
+                            <span>Favoritos</span>
+                            <strong id="totalFavoritos">0</strong>
+                        </div>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon">
+                            ♙
+                        </div>
+
+                        <div>
+                            <span>Clientes</span>
+                            <strong id="totalClientes">0</strong>
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <span class="section-label">
+                        SISTEMA
+                    </span>
+
+                    <h3>
+                        Status da plataforma
+                    </h3>
+
+                    <p>
+                        O painel administrativo controla as galerias,
+                        fotos e informações utilizadas pelo site público.
+                    </p>
+
+                    <div class="integration-status">
+
+                        <div>
+                            <span class="status-dot"></span>
+                            Site público conectado
+                        </div>
+
+                        <div>
+                            <span class="status-dot"></span>
+                            Banco de fotos ativo
+                        </div>
+
+                        <div>
+                            <span class="status-dot"></span>
+                            Limite configurado: 1.500 fotos
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 GALERIAS
+            ================================================== -->
+
+            <section
+                id="section-galerias"
+                class="admin-section"
+                hidden
+            >
+
+                <div class="section-top">
+
+                    <div>
+
+                        <span class="section-label">
+                            CONTEÚDO
+                        </span>
+
+                        <h2>Galerias</h2>
+
+                        <p>
+                            Crie e organize as galerias do fotógrafo.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="btnNovaGaleria"
+                        class="btn btn-principal"
+                    >
+                        + Nova galeria
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="listaGalerias"
+                    class="admin-grid"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOTOS
+            ================================================== -->
+
+            <section
+                id="section-fotos"
+                class="admin-section"
+                hidden
+            >
+
+                <div class="section-top">
+
+                    <div>
+
+                        <span class="section-label">
+                            CONTEÚDO
+                        </span>
+
+                        <h2>Fotos</h2>
+
+                        <p>
+                            Gerencie as fotos das galerias.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="btnNovaFoto"
+                        class="btn btn-principal"
+                    >
+                        + Nova foto
+                    </button>
+
+                </div>
+
+
+                <div class="foto-toolbar">
+
+                    <div class="filtro-box">
+
+                        <label for="filtroGaleria">
+                            Galeria
+                        </label>
+
+                        <select id="filtroGaleria">
+
+                            <option value="todas">
+                                Todas as galerias
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="contador-fotos">
+
+                        <strong id="contadorFotosPagina">
+                            0
+                        </strong>
+
+                        <span>
+                            fotos cadastradas
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="listaFotos"
+                    class="foto-admin-grid"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CLIENTES
+            ================================================== -->
+
+            <section
+                id="section-clientes"
+                class="admin-section"
+                hidden
+            >
+
+                <div class="section-top">
+
+                    <div>
+
+                        <span class="section-label">
+                            RELACIONAMENTO
+                        </span>
+
+                        <h2>Clientes</h2>
+
+                        <p>
+                            Cadastre e consulte seus clientes.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="btnNovoCliente"
+                        class="btn btn-principal"
+                    >
+                        + Novo cliente
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="listaClientes"
+                    class="clientes-lista"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FAVORITOS
+            ================================================== -->
+
+            <section
+                id="section-favoritos"
+                class="admin-section"
+                hidden
+            >
+
+                <div class="section-top">
+
+                    <div>
+
+                        <span class="section-label">
+                            INTERAÇÃO
+                        </span>
+
+                        <h2>Favoritos</h2>
+
+                        <p>
+                            Consulte as fotos marcadas pelos clientes.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="listaFavoritos"
+                    class="favoritos-lista"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CONFIGURAÇÕES
+            ================================================== -->
+
+            <section
+                id="section-configuracoes"
+                class="admin-section"
+                hidden
+            >
+
+                <div class="section-top">
+
+                    <div>
+
+                        <span class="section-label">
+                            SISTEMA
+                        </span>
+
+                        <h2>Configurações</h2>
+
+                        <p>
+                            Configure os dados básicos do sistema.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-grid">
+
+                    <div class="settings-card">
+
+                        <h3>
+                            WhatsApp
+                        </h3>
+
+                        <p>
+                            Número usado pelo botão de contato do site.
+                        </p>
+
+                        <label for="configWhatsApp">
+                            Número
+                        </label>
+
+                        <input
+                            type="text"
+                            id="configWhatsApp"
+                            placeholder="5519999999999"
+                        >
+
+                        <button
+                            type="button"
+                            id="salvarWhatsApp"
+                            class="btn btn-principal"
+                        >
+                            Salvar WhatsApp
+                        </button>
+
+                    </div>
+
+
+                    <div class="settings-card">
+
+                        <h3>
+                            Senha administrativa
+                        </h3>
+
+                        <p>
+                            Altere a senha deste painel.
+                        </p>
+
+                        <label for="novaSenha">
+                            Nova senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="novaSenha"
+                        >
+
+                        <label for="confirmarSenha">
+                            Confirmar senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmarSenha"
+                        >
+
+                        <button
+                            type="button"
+                            id="alterarSenha"
+                            class="btn btn-principal"
+                        >
+                            Alterar senha
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </section>
+
+
+    <!-- =====================================================
+         MODAL GALERIA
+    ====================================================== -->
+
+    <div
+        id="modalGaleria"
+        class="modal"
+        hidden
+    >
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-box">
+
+            <button
+                type="button"
+                class="modal-fechar"
+                data-fechar-modal
+            >
+                ×
+            </button>
+
+            <span class="section-label">
+                GALERIA
+            </span>
+
+            <h2 id="modalGaleriaTitulo">
+                Nova galeria
+            </h2>
+
+            <form id="formGaleria">
+
+                <input
+                    type="hidden"
+                    id="galeriaId"
+                >
+
+                <label for="galeriaNome">
+                    Nome
+                </label>
+
+                <input
+                    type="text"
+                    id="galeriaNome"
+                    required
+                >
+
+                <label for="galeriaDescricao">
+                    Descrição
+                </label>
+
+                <textarea
+                    id="galeriaDescricao"
+                    rows="4"
+                ></textarea>
+
+                <div class="modal-acoes">
+
+                    <button
+                        type="button"
+                        class="btn btn-secundario"
+                        data-fechar-modal
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-principal"
+                    >
+                        Salvar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MODAL FOTO
+    ====================================================== -->
+
+    <div
+        id="modalFoto"
+        class="modal"
+        hidden
+    >
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-box">
+
+            <button
+                type="button"
+                class="modal-fechar"
+                data-fechar-modal
+            >
+                ×
+            </button>
+
+            <span class="section-label">
+                FOTO
+            </span>
+
+            <h2>
+                Adicionar foto
+            </h2>
+
+            <form id="formFoto">
+
+                <label for="fotoGaleria">
+                    Galeria
+                </label>
+
+                <select
+                    id="fotoGaleria"
+                    required
+                ></select>
+
+                <label for="fotoNome">
+                    Nome
+                </label>
+
+                <input
+                    type="text"
+                    id="fotoNome"
+                    required
+                >
+
+                <label for="fotoArquivo">
+                    Arquivo
+                </label>
+
+                <input
+                    type="file"
+                    id="fotoArquivo"
+                    accept="image/*"
+                    required
+                >
+
+                <div
+                    id="previewFoto"
+                    class="preview-foto"
+                ></div>
+
+                <label class="checkbox-label">
+
+                    <input
+                        type="checkbox"
+                        id="fotoLiberada"
+                        checked
+                    >
+
+                    Foto publicada no site
+
+                </label>
+
+                <div class="modal-acoes">
+
+                    <button
+                        type="button"
+                        class="btn btn-secundario"
+                        data-fechar-modal
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-principal"
+                    >
+                        Salvar foto
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MODAL CLIENTE
+    ====================================================== -->
+
+    <div
+        id="modalCliente"
+        class="modal"
+        hidden
+    >
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-box">
+
+            <button
+                type="button"
+                class="modal-fechar"
+                data-fechar-modal
+            >
+                ×
+            </button>
+
+            <span class="section-label">
+                CLIENTE
+            </span>
+
+            <h2>
+                Novo cliente
+            </h2>
+
+            <form id="formCliente">
+
+                <label for="clienteNome">
+                    Nome
+                </label>
+
+                <input
+                    type="text"
+                    id="clienteNome"
+                    required
+                >
+
+                <label for="clienteEmail">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="clienteEmail"
+                >
+
+                <label for="clienteTelefone">
+                    Telefone
+                </label>
+
+                <input
+                    type="tel"
+                    id="clienteTelefone"
+                >
+
+                <div class="modal-acoes">
+
+                    <button
+                        type="button"
+                        class="btn btn-secundario"
+                        data-fechar-modal
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-principal"
+                    >
+                        Salvar cliente
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOAST -->
+
+    <div
+        id="toast"
+        class="toast"
+        aria-live="polite"
+    ></div>
+
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
